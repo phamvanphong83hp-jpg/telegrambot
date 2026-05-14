@@ -76,10 +76,24 @@ def random_password():
 
     return ''.join(random.choice(chars) for _ in range(length))
 
-# random số điện thoại
+# random số điện thoại Việt Nam chuẩn
 def random_phone():
 
-    return "0" + ''.join(random.choice(string.digits) for _ in range(9))
+    prefixes = [
+        "032", "033", "034", "035", "036", "037", "038", "039",
+        "070", "076", "077", "078", "079",
+        "081", "082", "083", "084", "085",
+        "056", "058",
+        "086", "088", "089",
+        "090", "091", "092", "093", "094",
+        "096", "097", "098", "099"
+    ]
+
+    prefix = random.choice(prefixes)
+
+    remain = ''.join(random.choice(string.digits) for _ in range(7))
+
+    return prefix + remain
 
 @bot.message_handler(func=lambda m: True)
 def handle(message):
@@ -128,7 +142,7 @@ def handle(message):
         # ngày sinh ngắn
         birthday_short = "050190"
 
-        # sđt
+        # số điện thoại
         phone = random_phone()
 
         # email
