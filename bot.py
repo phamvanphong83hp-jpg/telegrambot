@@ -2,7 +2,7 @@ import telebot
 import random
 import string
 
-TOKEN = "TOKEN_BOT_CUA_BAN"
+TOKEN = "8802912711:AAHcZSa_3f1y2wcBQNstWTrBlYQch-r_iQ8"
 
 bot = telebot.TeleBot(TOKEN)
 
