@@ -2,7 +2,7 @@ import telebot
 import random
 import string
 
-TOKEN = "8802912711:AAHcZSa_3f1y2wcBQNstWTrBlYQch-r_iQ8"
+TOKEN = "TOKEN_BOT_CUA_BAN"
 
 bot = telebot.TeleBot(TOKEN)
 
@@ -58,23 +58,38 @@ provinces = [
     "BACLIEU"
 ]
 
-# random user 6-10 ký tự
-def random_username():
+# tạo username theo tên
+def create_username(name):
 
-    length = random.randint(6, 10)
+    parts = name.lower().split()
 
-    chars = string.ascii_lowercase + string.digits
+    first = parts[-1]
 
-    return ''.join(random.choice(chars) for _ in range(length))
+    middle = parts[-2] if len(parts) >= 2 else ""
 
-# random pass 6-8 ký tự
-def random_password():
+    number = ''.join(random.choice(string.digits) for _ in range(2))
 
-    length = random.randint(6, 8)
+    suffix = ''.join(random.choice(string.ascii_lowercase) for _ in range(2))
 
-    chars = string.ascii_letters + string.digits
+    return f"{first}{middle}{number}{suffix}"
 
-    return ''.join(random.choice(chars) for _ in range(length))
+# tạo password theo tên
+def create_password(name):
+
+    parts = name.lower().split()
+
+    first = parts[-1]
+
+    last = parts[0]
+
+    number = ''.join(random.choice(string.digits) for _ in range(3))
+
+    return f"{first}{last}{number}"
+
+# random 6 số
+def random_six():
+
+    return ''.join(random.choice(string.digits) for _ in range(6))
 
 # random số điện thoại Việt Nam chuẩn
 def random_phone():
@@ -130,17 +145,17 @@ def handle(message):
         # ngân hàng
         bank = ''.join(parts[stk_index + 1:]).upper()
 
-        # random chi nhánh
+        # chi nhánh random
         province = random.choice(provinces)
 
-        # random user
-        username = random_username()
+        # user
+        username = create_username(name)
 
-        # random pass
-        password = random_password()
+        # pass
+        password = create_password(name)
 
-        # ngày sinh ngắn
-        birthday_short = "050190"
+        # 6 số random
+        birthday_short = random_six()
 
         # số điện thoại
         phone = random_phone()
